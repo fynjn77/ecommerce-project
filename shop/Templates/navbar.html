@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-md navbar-light bg-dark px-4">
+    <a href="{% url 'home' %}" class="text-light text-uppercase fw-bold navbar-brand">
+        <span class=" text-success material-icons md-48">store</span>
+    </a>
+    <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#navbar"><span class="navbar-toggler-icon"></span></button>
+    <div id="navbar" class="collapse navbar-collapse justify-content-between">
+        <ul class="navbar-nav ">
+
+            <li class="nav-item align-middle px-2">
+                <!--            <a href="#" class="text-light text-uppercase fw-bold navbar-brand">-->
+                <!--                    <span class=" text-success material-icons md-48">store</span>-->
+                <!--             </a>-->
+            </li>
+
+            <li class="nav-item px-2 dropdown " >
+                <a class="text-light fw-bold dropdown-toggle nav-link
+            text-uppercase px-3" href="" data-bs-toggle="dropdown">Categories</a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'home' %}" class="dropdown-item">All products</a>
+                    {% for category in links %}
+                    <a href="{{ category.get_url}}" class="dropdown-item">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+
+            <li class="nav-item px-2">
+                <a href="" class="text-light text-uppercase fw-bold nav-link">Contacts</a>
+            </li>
+            <li class="nav-item px-2">
+                <a href="" class="text-light text-uppercase fw-bold nav-link">About</a>
+            </li>
+            {% if request.user.is_authenticated and request.user.first_name %}
+            <li class="nav-item px-2">
+                <span href="" class="text-light text-uppercase fw-bold nav-link">Welcome, {{ request.user.first_name}}!
+                    <span class="material-icons cart-icon">
+                        account_circle
+                    </span>
+                </span>
+            </li>
+            <li class="nav-item px-2">
+                <a href="{% url 'logout' %}" class="text-light text-uppercase fw-bold nav-link">
+                    Log out
+                    <span class="material-icons cart-icon">
+                       logout
+                    </span>
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item px-2">
+                <a href="{% url 'signup' %}" class="text-light text-uppercase fw-bold nav-link">
+                    Sign Up
+                    <span class="material-icons cart-icon">
+                          assignment_ind
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item px-2">
+                <a href="{% url 'login' %}" class="text-light text-uppercase fw-bold nav-link">
+                    Log in
+                    <span class="material-icons cart-icon">
+                          login
+                    </span>
+                </a>
+            </li>
+
+            {% endif %}
+
+            {% if item_count > 0 %}
+            <li class="nav-item px-2">
+                <a href="{% url 'cart_detail' %}" class="text-light text-uppercase fw-bold nav-link">
+                    <span class="material-icons cart-icon">
+                    add_shopping_cart
+                    </span>({{item_count}})
+                </a>
+            </li>
+            {% endif %}
+            <li class="nav-item px-2">
+            </li>
+        </ul>
+
+        <form action="" class="form-inline">
+            <div>
+                <input type="text" placeholder="Search">
+                <button class="btn-success">
+                    <span class=" text-light material-icons md-18">search</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</nav>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %} <!--наследую из base.html-->
+{% load static%}  <!--загружаю статические файлы-->
+{% load crispy_forms_tags %}
+{% block title %} Login {% endblock %}
+{% block content %} <!--вставляю блок на который сослался в base.html-->
+<div class="container"><br>
+  <h1 class="product_title text-center">
+    Login or Create a New Account
+  </h1>
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-6 text-center custom_div">
+      <br>
+      <h2 class="prodict_title">
+        New user
+      </h2>
+      <br>
+      <a href="{% url 'signup' %}" class="btn btn-secondary">Create new user </a>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 bg-dark text-light">
+      <div><br>
+        <h2 class="product_title">Register users only</h2>
+        <form method="post">
+          {% csrf_token %}
+          <p>
+            {{ form | crispy }}
+          </p>
+          <button type="submit" class="btn btn-secondary"
+          >Log in</button>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

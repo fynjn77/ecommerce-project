@@ -1,0 +1,48 @@
+{% extends 'base.html' %} <!--наследую из base.html-->
+{% load static%}  <!--загружаю статические файлы-->
+{% block title %} Home {% endblock %}
+{% block content %} <!--вставляю блок на который сослался в base.html-->
+<div class="container-fluid">
+    <div class="row">
+        <img src="{% static 'images/time4shop.jpg' %}" alt="">
+    </div>
+</div>
+<div class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto my-2 text-center">
+                <h1 class="text-capitalize fw-bold">
+                    Our products
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+            <div class="col-9 mx-auto col-md-6 col-lg-3">
+                <div class="card mb-4 p-2">
+                    <a href="{{ product.get_url}}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top ">
+                    </a>
+                    <div class="card-footer d-flex justify-content-between"
+                         style="background: transparent; border-colour: transparent;">
+                        <p class="fw-bold mb-0">
+                            {{ product.name }}
+                        </p>
+                        <h5 class="text-info fst-italic mb-0">{{ product.price }}</h5>
+                    </div>
+                </div>
+<!--                <div class="card-footer d-flex justify-content-between"-->
+<!--                style="background: transparent; border-colour: transparent;">-->
+<!--                    <p class="fw-bold mb-0">-->
+<!--                        Knife mod.1-->
+<!--                    </p>-->
+<!--                    <h5 class="text-info font-intalic mb-0">5 silver</h5>-->
+<!--                </div>-->
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %} <!--наследую из base.html-->
+{% load static %}
+
+{% block title %} Product {% endblock %}
+
+{% block content %} <!--вставляю блок на который сослался в base.html-->
+<!--<h1>Product</h1>-->
+<div class="container py-5">
+    <div class="row mt-0">
+        <div class="col-10 mx-auto col-md-6 my-3">
+            <img src="{{ product.image.url }}" alt="product" width="650" height="auto"></div>
+    </div>
+</div>
+<div class="col-10 mx-auto col-md-6 my-3">
+    <div>
+        <h1 class="product_title">{{ product.name }}</h1>
+        <h5 class="text-info fst-italic mb-4">{{ product.price }} gold</h5>
+        <p class="product_decs">Product description</p>
+        <p class="text-justify product_text">
+            {{ product.description }}
+        </p>
+        {% if product.stock <= 0 %}
+        <p class="text-justify product-text">Out Of Stock!</p>
+        {% else %}
+        <a href="{% url 'add_cart' product.id %}">Add to Cart!</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
